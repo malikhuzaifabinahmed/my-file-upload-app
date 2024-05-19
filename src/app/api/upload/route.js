@@ -4,7 +4,8 @@ import fs from "fs";
 import path from "path";
 import { createObjectCsvWriter } from "csv-writer";
 import { v4 as uuidv4 } from "uuid";
-
+export const dynamic = "force-dynamic";
+// 'auto' | 'force-dynamic' | 'error' | 'force-static'
 // Ensure the uploads directory exists
 const uploadDir = path.join(process.cwd(), "/uploads");
 if (!fs.existsSync(uploadDir)) {
@@ -34,12 +35,6 @@ const csvWriter = createObjectCsvWriter({
   header: csvHeaders,
   append: true,
 });
-
-export const config = {
-  api: {
-    bodyParser: false, // Disabling body parsing by Next.js
-  },
-};
 
 export async function POST(req) {
   try {
